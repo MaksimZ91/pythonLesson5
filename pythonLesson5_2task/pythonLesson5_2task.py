@@ -16,6 +16,8 @@ candies_player_1 = 0
 candies_player_2 = 0
 
 def step(path, candies):
+    with open(path, "r+") as read:
+        player_candis = int(read.read())
     limit = 28
     if candies < limit:
         limit = candies    
@@ -26,8 +28,13 @@ def step(path, candies):
             candie = int(input("Какое колличество конфеты вы хотите забрать: "))
     except:
         print(f"Значение дожлны быть число от 1 до {limit}.")
-        candie = int(input("Какое колличество конфеты вы хотите забрать: "))  
-       
+        candie = int(input("Какое колличество конфеты вы хотите забрать: "))     
+    with open(path, "w") as data:          
+        player_candis += candie
+        candies -= candie
+        data.write(str(player_candis))  
+           
+    print(f"Количество конфет у игорка № 1: {player_candis}, всего конфет осталось {candies}" )     
     return candie
 
 
@@ -46,9 +53,7 @@ def lottery():
 
 
 def game():
-    candies = 100    
-    player1_candies = 0
-    player2_candies = 0
+    candies = 100       
     player_1_path = "./pythonLesson5_2task/fisrt_player_canides.txt"
     player_2_path = "./pythonLesson5_2task/second_player_candies.txt"
     players = lottery()
@@ -56,17 +61,14 @@ def game():
         if players["Игрок 1"]:
             print("Ход игорка №1")
             st = step(player_1_path, candies)
-            candies -= st
-            player1_candies += st
+            candies -= st            
             players["Игрок 1"] = False            
-            print(f"Количество конфет у игорка № 1: {player1_candies}, всего конфет осталось {candies}" )
+            
         else: 
             print("Ход игорка №2")
             st = step(player_2_path, candies)
-            candies -= st
-            player2_candies += st
-            players["Игрок 1"] = True         
-            print(f"Количество конфет у игорка № 2: {player2_candies}, всего конфет осталось {candies}" )  
+            candies -= st            
+            players["Игрок 1"] = True 
     print(candies)   
 
 
