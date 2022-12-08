@@ -25,7 +25,7 @@ def step(path, candies):
             print(f"Общие колличество конфет уменьшилось до {candies}") if candie > limit else "" 
             candie = int(input("Какое колличество конфеты вы хотите забрать: "))
     except:
-        print("Значение дожлны быть число от 1 до 28.")
+        print(f"Значение дожлны быть число от 1 до {limit}.")
         candie = int(input("Какое колличество конфеты вы хотите забрать: "))  
        
     return candie
