@@ -22,7 +22,7 @@ def step(path, candies):
     try:
         candie = int(input("Какое колличество конфеты вы хотите забрать: "))
         while 1 > candie or candie > limit:
-           # print(f"Колличество конфет уменьшилось до {candies}") if candies < limit else "" доработать
+            print(f"Общие колличество конфет уменьшилось до {candies}") if candie > limit else "" 
             candie = int(input("Какое колличество конфеты вы хотите забрать: "))
     except:
         print("Значение дожлны быть число от 1 до 28.")
