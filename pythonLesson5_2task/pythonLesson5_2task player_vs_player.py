@@ -14,7 +14,7 @@ pathPlayer1 = "./pythonLesson5_2task/fisrt_player_canides.txt"
 pathPlayer2 = "./pythonLesson5_2task/second_player_candies.txt"
 
 def init_game(pathCandies, pathPlayer1, pathPlayer2):
-    candies = 100
+    candies = 2021
     firstPlayerCandies = 0   
     secondPlayerCandies = 0     
     writer(pathCandies, candies)

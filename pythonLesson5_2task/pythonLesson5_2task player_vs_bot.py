@@ -19,8 +19,16 @@ def init_game(pathCandies, pathPlayer1, pathPlayer2):
     secondPlayerCandies = 0     
     writer(pathCandies, candies)
     writer(pathPlayer1, firstPlayerCandies)
-    writer(pathPlayer2, secondPlayerCandies)    
+    writer(pathPlayer2, secondPlayerCandies)   
 
+def botLogic(candies):  
+  limit = 28
+  if candies <= limit:    
+    return candies  
+  if (candies - limit) > (limit + 1):      
+      return limit 
+  else:
+       return candies - limit - 1   
 
 
 def reader(path):
@@ -69,13 +77,12 @@ def step(candies, pathCandies, pathPlayer, player):
     return candies
 
 def stepBot(candies, pathCandies, pathPlayer): 
-    playerCandies = reader(pathPlayer)
-    limit = 28
-    if candies < limit:
-        limit = candies  
-    requestUserCandies = random.randint(1,limit)
-    playerCandies += requestUserCandies
-    candies -= requestUserCandies
+    playerCandies = reader(pathPlayer) 
+    requestBotCandies = botLogic(candies)
+    if not requestBotCandies: requestBotCandies = 1 
+    print(f"Бот берет {requestBotCandies} конфет" )    
+    playerCandies += requestBotCandies
+    candies -= requestBotCandies
     writer(pathCandies,candies)
     writer(pathPlayer, playerCandies )     
     print(f"Количество конфет у бота: {playerCandies}, всего конфет осталось {candies}" )     
@@ -96,7 +103,7 @@ def game( pathCandies, pathPlayer1, pathPlayer2 ):
             player = False  
         else: 
             print("Ход бота")
-            stepBot(candies,pathCandies, pathPlayer2) 
+            stepBot(candies, pathCandies, pathPlayer2) 
             candies = reader(pathCandies) 
             if not candies:                        
                 return print (f"Победил бот сделав последний ход") 
@@ -105,3 +112,5 @@ def game( pathCandies, pathPlayer1, pathPlayer2 ):
 
 
 game(pathCandies, pathPlayer1, pathPlayer2)
+
+
