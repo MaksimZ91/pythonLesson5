@@ -18,7 +18,7 @@ def userStep(board, symbol):
         userCords = list(map(int,input("Введите координаты через пробел в формате строка - стобец: ").split()))
     while (userCords[0] <= 0 or userCords[0] >= 4) or (userCords[1] <= 0 or userCords[1] >= 4):
         userCords = list(map(int,input("Введите координаты через пробел в формате строка - стобец: ").split()))
-    while not board[userCords[0]-1][userCords[1]-1] == ("*" or symbol):
+    while not board[userCords[0]-1][userCords[1]-1] == ("Z" or symbol):
         print("Ячейка занята введите другую координату!!!")
         userCords = list(map(int,input("Введите координаты через пробел в формате строка - стобец: ").split()))
     board[userCords[0]-1][userCords[1]-1] = symbol
@@ -32,7 +32,23 @@ def winerChek(board, winerBoard):
     tmp = ""        
     tmp = tmp.join(stringBoard)     
     for k in winerBoard:       
-        print(k, tmp)
+        if tmp[0] == k[0] and tmp[1] == k[1] and tmp[2] == k[2]:
+            return False
+        elif tmp[3] == k[3] and tmp[4] == k[4] and tmp[5] == k[5]:
+            return False
+        elif tmp[6] == k[6] and tmp[7] == k[7] and tmp[8] == k[8]:
+            return False  
+        elif tmp[0] == k[0] and tmp[3] == k[3] and tmp[5] == k[5]:
+            return False
+        elif tmp[1] == k[1] and tmp[4] == k[4] and tmp[7] == k[7]:
+            return False
+        elif tmp[2] == k[2] and tmp[5] == k[5] and tmp[8] == k[8]:
+            return False  
+        elif tmp[0] == k[0] and tmp[4] == k[4] and tmp[8] == k[8]:
+            return False  
+        elif tmp[2] == k[2] and tmp[4] == k[4] and tmp[6] == k[6]:
+            return False                   
+
       
    
    
@@ -59,7 +75,7 @@ winerBoard = ["XXX******", "***XXX***", "******XXX",
 
 def game(winerBoard):
     print("Игра началась.")
-    board = [["*"]*3 for i in range(3)]
+    board = [["Z"]*3 for i in range(3)]
     printBoard(board)
     flag = True
     chek = True
